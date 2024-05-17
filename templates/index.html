@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Flask App</title>
+</head>
+<body>
+    <h1>Tracker</h1>
+
+    <form method="POST">
+        <label>
+            <input type="checkbox" name="workout" onclick="changeColor(this)"> Workout
+        </label><br>
+        <label>
+            <input type="checkbox" name="leetcode" onclick="changeColor(this)"> Leetcode
+        </label><br>
+        <label>
+            <input type="checkbox" name="cs_concepts" onclick="changeColor(this)"> CS Concepts learning
+        </label><br>
+        <label>
+            <input type="checkbox" name="journal" onclick="changeColor(this)"> Journal
+        </label><br>
+        <label>
+            <input type="checkbox" name="moisturize" onclick="changeColor(this)"> Moisturize before bed
+        </label><br>
+        <label>
+            <input type="checkbox" name="minoxidil" onclick="changeColor(this)"> Minoxidil
+        </label><br>
+        <br>
+        <label for="thoughts">Thoughts (optional):</label><br>
+        <textarea name="thoughts" id="thoughts" rows="4" cols="50"></textarea><br>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function changeColor(checkbox) {
+            var label = checkbox.parentNode;
+            if (checkbox.checked) {
+                label.style.color = "green";
+            } else {
+                label.style.color = "";
+            }
+        }
+    </script>
+</body>
+</body>
+</html>
