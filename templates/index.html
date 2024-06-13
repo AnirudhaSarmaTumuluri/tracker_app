@@ -36,14 +36,27 @@
 
     <script>
         function changeColor(checkbox) {
-            var label = checkbox.parentNode;
-            if (checkbox.checked) {
-                label.style.color = "green";
-            } else {
-                label.style.color = "";
+          const label = checkbox.parentElement;
+          if (checkbox.checked) {
+            label.style.color = 'green'; // Change to your desired color
+    
+            // Create a new text input
+            const newInput = document.createElement("input");
+            newInput.type = "text";
+            newInput.name = checkbox.name + "_info"; // Give it a unique name
+            newInput.placeholder = "Additional info";
+            label.appendChild(newInput); 
+          } else {
+            label.style.color = ''; // Reset color
+            
+            // Remove the associated text input
+            const infoInput = label.querySelector(`input[name="${checkbox.name}_info"]`);
+            if (infoInput) {
+              label.removeChild(infoInput);
             }
+          }
         }
-    </script>
+      </script>
 </body>
 </body>
 </html>
