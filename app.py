@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from db_scripts import *
 
 app = Flask(__name__)
 
@@ -28,6 +29,24 @@ def home():
         return redirect(url_for('home'))
 
     return render_template('index.html')
+
+@app.route('/journal', methods=['GET', 'POST'])
+def journal():
+    if request.method == 'POST':
+        # entry_id = request.form['entry_id']
+        entry_type = request.form['entry_type']
+        content = request.form['content']  # Use 'content' for consistency
+
+
+        if entry_type=="quote":
+            update_quote(content)
+        # Print the submitted data
+        print("Form Data:")
+        print(f"  Entry Type: {entry_type}")
+        print(f"  Content: {content}")
+        # ...No database update is performed...
+
+    return render_template("journal_update.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
