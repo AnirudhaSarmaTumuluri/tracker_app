@@ -1,13 +1,26 @@
+import psycopg2
+from db_scripts.helper import *
 
+def insert_journal_entry(entry_type, entry):
+    try:
+        conn = connect_to_db()
+        cur = conn.cursor()
 
-def update_quote(quote):
-    # TODO
-    pass
+        # Use parameterized query to safely handle single quotes
+        insert_query = """
+        INSERT INTO test_schema.journal_entries (entry_type, entry, user_id)
+        VALUES (%s, %s, %s)
+        """
 
-def update_story(story):
-    # TODO
-    pass
+        # Pass values as a tuple
+        values = (entry_type, entry, 0)
+        cur.execute(insert_query, values)
 
-def update_thoughts(thought):
-    # TODO
-    pass
+        conn.commit()
+        print("Updated entry successfully")
+    except psycopg2.Error as e:
+        print(f"Error creating table: {e}")
+        conn.rollback() 
+    finally:
+        cur.close()
+        conn.close()

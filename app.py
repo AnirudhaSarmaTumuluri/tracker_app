@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from db_scripts import *
+from db_scripts.journal_db import *
 
 app = Flask(__name__)
 
@@ -37,13 +37,12 @@ def journal():
         entry_type = request.form['entry_type']
         content = request.form['content']  # Use 'content' for consistency
 
-
-        if entry_type=="quote":
-            update_quote(content)
         # Print the submitted data
         print("Form Data:")
         print(f"  Entry Type: {entry_type}")
         print(f"  Content: {content}")
+
+        insert_journal_entry(entry_type, content)
         # ...No database update is performed...
 
     return render_template("journal_update.html")
